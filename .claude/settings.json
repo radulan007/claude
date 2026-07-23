@@ -3,8 +3,34 @@
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "bash shared/scripts/sync-skill.sh" },
-          { "type": "command", "command": "bash shared/scripts/check-context.sh" }
+          {
+            "type": "command",
+            "command": "bash shared/scripts/sync-skill.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash shared/scripts/check-context.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/graphify hook-guard search"
+          }
+        ]
+      },
+      {
+        "matcher": "Read|Glob",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/local/bin/graphify hook-guard read"
+          }
         ]
       }
     ]
