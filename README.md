@@ -103,6 +103,10 @@ them for a different race).
 
 ### Useful API endpoints (utmblive-api.utmb.world)
 
+> **Every request needs an `X-Tenant` header** with the event slug (e.g. `X-Tenant: bucovinabyutmb`),
+> otherwise the API replies `404 {"message":"X-Tenant not provided"}`. The tenant is the path segment
+> before the year in the URL (`/ro/**bucovinabyutmb**/2026/…`).
+
 - `GET /races/{raceId}/progressive?type=FINAL_RANKING&category={cat}&page={n}&limit=10` — ranking list (has `totalRunner`, `runners[].bib`).
 - `GET /runners/{bib}?locale=ro` — one runner, incl. `detail.passings[]` with `pointId`, `time`, `cumulatedTime`, `speed`.
 - `GET /races/{raceId}` — race config incl. `distribution.distribution[]` (ordered `pointId`s).

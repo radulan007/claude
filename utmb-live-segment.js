@@ -22,6 +22,7 @@
 
   const API = "https://utmblive-api.utmb.world";
   const m = location.pathname.match(/\/([a-z0-9]+)\/(\d{4})\/([a-z0-9]+)/i);
+  const TENANT = (m && m[1]) || "bucovinabyutmb"; // required X-Tenant header
   const RACE = (m && m[3]) || "ur100m";
   const CAT = new URLSearchParams(location.search).get("category") || "20-34M";
 
@@ -41,7 +42,7 @@
 
   const secs = (t) => { if (t == null || t === "") return null; const p = String(t).split(":").map(Number); if (p.some(isNaN)) return null; return p.length === 3 ? p[0]*3600+p[1]*60+p[2] : p.length === 2 ? p[0]*60+p[1] : p[0]; };
   const fmt = (s) => { if (s == null || isNaN(s)) return "—"; const neg = s < 0; s = Math.abs(Math.round(s)); const h = Math.floor(s/3600), mm = Math.floor(s%3600/60), ss = s%60; return (neg?"-":"") + h + ":" + String(mm).padStart(2,"0") + ":" + String(ss).padStart(2,"0"); };
-  const j = async (u) => { const r = await fetch(u, { headers: { accept: "application/json" } }); if (!r.ok) throw new Error("HTTP " + r.status + " la " + u); return r.json(); };
+  const j = async (u) => { const r = await fetch(u, { headers: { accept: "application/json", "X-Tenant": TENANT } }); if (!r.ok) throw new Error("HTTP " + r.status + " la " + u); return r.json(); };
 
   try {
     // 1) all runners in the category
