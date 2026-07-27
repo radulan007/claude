@@ -72,7 +72,44 @@ the live data itself. Your own browser can reach the site fine — that's exactl
 snippet** is for. It makes the tool work regardless of network policy, CORS, or the site's internal
 API changing.
 
+## Recommended for UTMB Live: the all-in-one snippet
+
+`utmb-live-segment.js` is the easiest path for real UTMB Live data. Open the results page for
+your category (e.g. `https://live.utmb.world/ro/bucovinabyutmb/2026/ur100m?category=20-34M`),
+open the Console (`F12`), paste the whole file, and press Enter. It:
+
+1. reads the race + category from the URL,
+2. pulls every runner in that category from the official API (`https://utmblive-api.utmb.world`),
+3. computes each runner's **Adam & Eva → Finish** segment = `cumulatedTime(Finish) − cumulatedTime(Adam & Eva)`,
+4. ranks them fastest-first, flags the **record**, and renders a table on the page (with CSV export).
+
+No CORS problem, because it runs in the page's own origin against the same API the site uses.
+
+### How the checkpoints were identified
+
+The API exposes numeric `pointId`s, not names. For **Bucovina UR100M 2026** they were verified
+against the course profile (via cumulative distance = segment `speed` × segment `time`):
+
+| pointId | km | checkpoint |
+|--------:|---:|------------|
+| 166 | 95  | Transrarau |
+| **182** | **105** | **Adam & Eva** |
+| 194 | 111 | P. Mesteacan |
+| 196 | 112 | Runc |
+| **200** | **115** | **Finish** |
+
+So the snippet uses `ADAM_POINT = 182` and `FINISH_POINT = 200` (constants at the top — change
+them for a different race).
+
+### Useful API endpoints (utmblive-api.utmb.world)
+
+- `GET /races/{raceId}/progressive?type=FINAL_RANKING&category={cat}&page={n}&limit=10` — ranking list (has `totalRunner`, `runners[].bib`).
+- `GET /runners/{bib}?locale=ro` — one runner, incl. `detail.passings[]` with `pointId`, `time`, `cumulatedTime`, `speed`.
+- `GET /races/{raceId}` — race config incl. `distribution.distribution[]` (ordered `pointId`s).
+- `GET /event-context` — event + race list.
+
 ## Files
 
-- `index.html` — the app (open this).
-- `grab-utmb-data.js` — the browser-console data exporter (also embedded in the app's *Browser snippet* tab).
+- `utmb-live-segment.js` — **all-in-one** UTMB Live snippet (fetch + compute + table). Recommended.
+- `index.html` — the general offline analyzer (open this) for pasted / dropped data of any race.
+- `grab-utmb-data.js` — a generic browser-console page-data exporter (used by the app's *Browser snippet* tab).
