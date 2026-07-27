@@ -22,7 +22,8 @@
 
   const API = "https://utmblive-api.utmb.world";
   const m = location.pathname.match(/\/([a-z0-9]+)\/(\d{4})\/([a-z0-9]+)/i);
-  const TENANT = (m && m[1]) || "bucovinabyutmb"; // required X-Tenant header
+  // required X-Tenant header = "<eventSlug>_<year>", e.g. "bucovinabyutmb_2026"
+  const TENANT = m ? `${m[1]}_${m[2]}` : "bucovinabyutmb_2026";
   const RACE = (m && m[3]) || "ur100m";
   const CAT = new URLSearchParams(location.search).get("category") || "20-34M";
 
