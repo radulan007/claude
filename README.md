@@ -115,6 +115,7 @@ them for a different race).
 
 ## Files
 
-- `utmb-live-segment.js` — **all-in-one** UTMB Live snippet (fetch + compute + table). Recommended.
+- `utmb-live-segment.js` — **all-in-one** UTMB Live snippet for one category (fetch + compute + table). Recommended.
+- `utmb-live-segment-men.js` — same, but every **male** runner across all categories (`SEX = "H"`; set `"F"` for women).
 - `index.html` — the general offline analyzer (open this) for pasted / dropped data of any race.
 - `grab-utmb-data.js` — a generic browser-console page-data exporter (used by the app's *Browser snippet* tab).
