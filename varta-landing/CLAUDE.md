@@ -26,7 +26,8 @@ regulament notarial, GDPR, impozit. Aici sunt doar mockup-uri vizuale pentru ace
 - `README.md` — design tokens + lista de placeholders rămase.
 
 ## Notă despre skill-ul ui-ux-pro-max
-În mediul curent, skill-ul are doar `SKILL.md` (lipsesc `scripts/search.py` + baza de date `.csv`),
-deci căutarea în baza de design **nu a putut rula**. S-au folosit recomandările implicite din
-tabelul de priorități al skill-ului + direcția vizuală deja stabilită în ghid — nu baza de date.
-Pentru a folosi baza de date, reclonează skill-ul complet (cu `scripts/` și `references/`).
+Skill-ul a fost instalat complet (v2.11.0, din `nextlevelbuilder/ui-ux-pro-max-skill`), cu
+`scripts/search.py` + baza de date `.csv` + `references/`. Căutarea `--design-system` a rulat
+și a **confirmat** direcția „Varta oficial, energic" (dark high-contrast + accent roșu; pattern
+Hero+Features+CTA cu CTA sticky). Stilul „Liquid Glass" sugerat de BM25 NU a fost adoptat ca stil
+principal (perf. slabă + risc de contrast, potrivit pentru lux/SaaS, nu pentru promo de masă pe mobil).

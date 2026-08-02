@@ -68,5 +68,20 @@ Deschide direct `varta-campanie-landing.html` în browser (dublu-click) — nu a
 - `prefers-reduced-motion`: oprește animațiile; bateria afișează direct nivelul final.
 - Iconițe SVG inline (fără emoji), conform regulilor skill-ului.
 
-## 4) Notă despre skill-ul `ui-ux-pro-max`
-În mediul curent skill-ul avea **doar `SKILL.md`** — lipseau `scripts/search.py` și baza de date (`.csv`, `references/`), deci **căutarea în baza de design nu a putut rula**. S-au folosit recomandările implicite (tabelul de priorități din `SKILL.md` + direcția vizuală deja stabilită), **nu** baza de date. Pentru a folosi baza de date, reclonează skill-ul complet.
+## 4) Validare cu skill-ul `ui-ux-pro-max`
+Skill-ul a fost instalat complet (v2.11.0, cu `scripts/search.py` + baza de date) și
+**căutarea în baza de design a rulat efectiv**:
+
+```
+python3 search.py "promotional giveaway automotive battery brand energetic bold high-contrast" \
+  --design-system --stack html-tailwind
+```
+
+Ce a confirmat baza de date față de direcția aleasă:
+- **Pattern** — „Hero + Features + CTA" cu CTA sticky în navbar + CTA jos: exact structura implementată (hero · 3 pași · upload · sticky CTA pe mobil).
+- **Culori** — recomandă „high-contrast dark + brand accent" (fundal near-black, text alb, accent roșu): validează direct paleta carbon `#14161A` + text alb/silver + roșu Varta.
+- **Tipografie** — Inter (body) + un font mono (JetBrains Mono) + display: aceeași structură ca Inter + Space Mono (cifre/contor) + Saira (display). Am păstrat Saira (automotive/sportiv) în locul serif-ului editorial sugerat.
+- **Stil** — sugestia BM25 a fost „Liquid Glass", marcată însă cu **performanță slabă + risc de contrast** și potrivită pentru SaaS/lux. **Nu a fost adoptată ca stil principal** (public de masă, mobil, obiectiv unic); s-a păstrat doar accentul discret de glass (backdrop-blur) pe header-ul sticky.
+- **Checklist** — iconițe SVG, hover 150–300ms, focus vizibil, `prefers-reduced-motion`, contrast ≥4.5:1: respectate. S-a adăugat `cursor:pointer` pe zona de drop (label), conform checklist-ului.
+
+Concluzie: baza de date **confirmă** direcția „Varta oficial, energic", nu o răstoarnă.

@@ -316,7 +316,9 @@
   .varta-lp .vlp-dropzone{
     border:2px dashed #c2c8d0; border-radius:var(--r-md);
     background:#fafbfc; padding:var(--space-4); text-align:center; color:#5b616b;
+    cursor:pointer; transition:border-color .18s ease, background-color .18s ease;
   }
+  .varta-lp .vlp-dropzone:hover{ border-color:var(--varta-red); background:#fff; }
   .varta-lp .vlp-dropzone svg{ width:40px; height:40px; color:var(--varta-red); margin:0 auto var(--space-1); }
   .varta-lp .vlp-form__note{
     margin-top:var(--space-2); font-family:var(--font-mono); font-size:12px; color:#7a808a;
