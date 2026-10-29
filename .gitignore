@@ -1,0 +1,7 @@
+node_modules/
+renders/
+out/
+build/
+.hyperframes/
+verify-output/
+*.log

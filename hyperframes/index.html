@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en" data-resolution="landscape">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <style>
+      :root {
+        --ground: #0b0f14;
+        --ink: #f4f1ea;
+        --accent: #ff5a1f;
+        --muted: #8a94a3;
+        --font-display: "Inter", "DejaVu Sans", sans-serif;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        font-family: var(--font-display);
+        color: var(--ink);
+      }
+      #bar {
+        position: absolute;
+        left: 160px;
+        top: 420px;
+        width: 12px;
+        height: 240px;
+        background: var(--accent);
+        transform-origin: top center;
+      }
+      #title {
+        position: absolute;
+        left: 220px;
+        top: 400px;
+        font-size: 140px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+      #subtitle {
+        position: absolute;
+        left: 224px;
+        top: 570px;
+        font-size: 44px;
+        color: var(--muted);
+        letter-spacing: 0.02em;
+      }
+      #tag {
+        position: absolute;
+        right: 160px;
+        bottom: 120px;
+        font-size: 28px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="5"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="bar" class="clip" data-start="0" data-duration="5" data-track-index="0"></div>
+      <h1 id="title" class="clip" data-start="0" data-duration="5" data-track-index="1">Running Trails</h1>
+      <p id="subtitle" class="clip" data-start="0" data-duration="5" data-track-index="2">
+        Rendered with HyperFrames
+      </p>
+      <p id="tag" class="clip" data-start="0" data-duration="5" data-track-index="3">Video toolchain check</p>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#bar", { scaleY: 0 }, { scaleY: 1, duration: 0.6, ease: "power4.out" }, 0.2);
+      tl.fromTo(
+        "#title",
+        { opacity: 0, x: -60, filter: "blur(10px)" },
+        { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.8, ease: "power4.out" },
+        0.4,
+      );
+      tl.fromTo("#subtitle", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.9);
+      tl.fromTo("#tag", { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.4);
+      tl.to(["#title", "#subtitle", "#bar", "#tag"], { opacity: 0, duration: 0.4, ease: "power2.in" }, 4.5);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
